@@ -546,41 +546,79 @@
       align-items: start;
     }
 
-    .about-text p {
-      font-size: 17px;
-      line-height: 1.85;
-      color: var(--text-muted);
-      margin-bottom: 20px;
+    .about-text {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
     }
 
-    .about-text p strong {
+    .about-text p {
+      font-size: 18px;
+      line-height: 1.9;
+      color: var(--text-muted);
+      margin: 0;
+      letter-spacing: 0.3px;
+    }
+
+    .about-text p:first-child {
+      font-size: 19px;
       color: var(--text);
       font-weight: 500;
     }
 
+    .about-text p strong {
+      color: var(--accent);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
     .about-highlight {
-      margin-top: 40px;
-      padding: 28px 32px;
-      border: 1px solid var(--glass-border);
-      border-left: 3px solid var(--accent);
-      background: var(--glass-bg);
-      backdrop-filter: blur(12px);
-      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      margin-top: 32px;
+      padding: 32px 40px;
+      border: 1px solid rgba(255, 107, 0, 0.2);
+      border-left: 4px solid var(--accent);
+      background: linear-gradient(135deg, rgba(255, 107, 0, 0.03) 0%, rgba(255, 107, 0, 0.01) 100%);
+      backdrop-filter: blur(16px);
+      border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-highlight::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--accent-dim) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .about-highlight:hover {
+      border-color: rgba(255, 107, 0, 0.4);
+      box-shadow: 0 8px 32px rgba(255, 107, 0, 0.1);
+    }
+
+    .about-highlight:hover::before {
+      opacity: 1;
     }
 
     .about-highlight p {
       font-family: 'Inter', sans-serif;
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 400;
-      line-height: 1.8;
+      line-height: 1.85;
       color: var(--text-muted);
       margin: 0;
       font-style: italic;
+      position: relative;
+      z-index: 1;
     }
 
     .about-highlight p strong {
       color: var(--accent);
-      font-weight: 600;
+      font-weight: 700;
+      letter-spacing: 0.3px;
     }
 
     .about-visual {
@@ -591,20 +629,14 @@
     }
 
     .about-card {
-      padding: 28px 32px;
+      padding: 36px 40px;
       border: 1px solid var(--glass-border);
-      background: var(--glass-bg);
-      backdrop-filter: blur(16px);
-      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, rgba(255, 107, 0, 0.02) 0%, transparent 100%);
+      backdrop-filter: blur(20px);
+      border-radius: var(--radius-lg);
       position: relative;
       overflow: hidden;
-      transition: border-color 0.4s, transform 0.4s, box-shadow 0.4s;
-    }
-
-    .about-card:hover {
-      border-color: rgba(255, 107, 0, 0.3);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(255, 107, 0, 0.08);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .about-card::before {
@@ -613,10 +645,16 @@
       top: 0;
       left: 0;
       width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent), transparent);
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), rgba(255, 107, 0, 0.3));
       border-radius: 2px;
-      transition: width 0.5s;
+      transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .about-card:hover {
+      border-color: rgba(255, 107, 0, 0.3);
+      transform: translateY(-6px);
+      box-shadow: 0 16px 48px rgba(255, 107, 0, 0.12);
     }
 
     .about-card:hover::before {
@@ -625,23 +663,30 @@
 
     .about-card-num {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 48px;
-      color: var(--accent);
-      opacity: 0.3;
+      font-size: 56px;
+      background: linear-gradient(135deg, var(--accent) 0%, rgba(255, 107, 0, 0.6) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      opacity: 0.9;
       line-height: 1;
+      margin-bottom: 12px;
+      font-weight: 700;
     }
 
     .about-card-title {
-      font-size: 13px;
-      font-weight: 500;
-      margin-bottom: 6px;
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 10px;
       color: var(--text);
+      letter-spacing: 0.5px;
     }
 
     .about-card-sub {
-      font-size: 12px;
+      font-size: 13px;
       color: var(--text-muted);
-      line-height: 1.6;
+      line-height: 1.7;
+      letter-spacing: 0.2px;
     }
 
     /* ─── SKILLS ─── */
@@ -1106,7 +1151,28 @@
 
       .about-grid {
         grid-template-columns: 1fr;
-        gap: 48px;
+        gap: 56px;
+      }
+
+      .about-card {
+        padding: 32px 36px;
+      }
+
+      .about-card-num {
+        font-size: 48px;
+      }
+
+      .about-text p {
+        font-size: 16px;
+      }
+
+      .about-highlight {
+        padding: 28px 32px;
+        margin-top: 28px;
+      }
+
+      .about-highlight p {
+        font-size: 14px;
       }
 
       .project-card {
